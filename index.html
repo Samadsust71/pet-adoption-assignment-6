@@ -21,8 +21,8 @@
                 clifford: "#da373d",
                 button: "#0E7A81",
                 activeBtn: "rgba(14, 122, 129, 0.1)",
-                primary: "rgba(19, 19, 19)",
-                secondary: "rgb(19, 19, 19,.7)",
+                primary: "rgb(19, 19, 19)",
+                secondary: "rgba(19, 19, 19,.7)",
               },
               fontFamily: {
                 lato: ["Lato", 'sans-serif'],
@@ -96,7 +96,7 @@
           </p>
           <a href="#main" class="btn bg-button text-white text-xl font-bold">View More</a>
            <!-- image content -->
-            <div class="w-1/2 object-cover">
+            <div class="lg:w-1/2 object-cover">
               <img src="/assests/pet.webp" alt="">
             </div>
         </div>
@@ -111,6 +111,48 @@
 
       </main>
      <!-- main section end -->
+      <!-- footer section start  -->
+      <footer class="bg-primary py-24">
+        <section class="footer w-11/12 mx-auto text-white lg:flex flex-col gap-10 lg:flex-row justify-between items-start">
+          <nav class="space-y-5 lg:space-y-10">
+            <a class="flex items-center gap-2 justify-center">
+              <img src="assests/logo.webp" alt="">
+              <h1 class="font-extrabold text-[32px]">Peddy</h1>
+            </a>
+            <div class="flex flex-col space-y-2">
+              <a class="">Location: av. Washington 165, NY CA 54003</a>
+              <a class="">Phone: +31 85 964 47 25</a>
+              <a class="">Email: info@yourdomain.com</a>
+              <a class="">Openings hours: 9.00 AM - 5.00 PM</a>
+              <div class="space-x-3">
+                <a href="" class="text-2xl"><i class="fa-brands fa-facebook text-[#00B2FF] bg-white rounded-full"></i></a>
+                <a href="" class="text-2xl"><i class="fa-brands fa-instagram"></i></a>
+                <a href="" class="text-2xl"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="" class="text-2xl"><i class="fa-brands fa-youtube"></i></a>
+              </div>
+            </div>
+            
+          </nav>
+          <nav class="space-y-5">
+            <h1 class="text-xl font-bold">Useful Links</h1>
+            <div class="flex flex-col justify-center items-start space-y-2">
+              <a href="">Home</a>
+              <a href="">About Us</a>
+              <a href="">Animals</a>
+              <a href="">Foundation</a>
+              <a href="">Contact</a>
+            </div>
+          </nav>
+          <nav class="space-y-4">
+            <h1 class="text-xl font-bold">Drop a Message</h1>
+            <div class="space-y-2">
+              <input type="text" placeholder="Type here" class="input bg-[#ffffff0d] input-bordered w-full" />
+             <button class="btn border-none w-full bg-button text-white">Subscribe</button>
+            </div>
+          </nav>
+        </section> 
+      </footer>
+      <!-- footer section end -->
 
     <script src="/js/app.js"></script>
 </body>
