@@ -137,7 +137,7 @@
                  </section>
                  <!-- card container section end here -->
                      
-                 <!-- modal section -->
+                 <!-- details modal section -->
                 <button id="modal-btn" class="btn hidden" onclick="my_modal_5.showModal()">open modal</button>
                 <dialog id="my_modal_5" class="modal modal-middle">
                   <div class="modal-box">
@@ -149,7 +149,24 @@
                    </div>
                   </div>
                 </dialog>
-                <!-- modal end -->
+                <!--details modal end -->
+                 <!-- adoption modal start -->
+              <dialog id="adoptModal" class="modal modal-middle">
+                <div class="modal-box">
+                 <div class="flex flex-col justify-center items-center">
+                  <h3 class="text-4xl text-violet-500 font-extrabold">Congratulations</h3>
+                  <p class="text-secondary text-2xl py-4">Adopting process start in...</p>
+                  <p id="countdownText" class="py-4 text-button text-4xl">3</p>
+                 </div>
+                  <div class="modal-action">
+                    <form method="dialog">
+                      <!-- if there is a button in form, it will close the modal -->
+                      <button id="hideModal" class="btn hidden">Close</button>
+                    </form>
+                  </div>
+              </div>
+             </dialog>
+             <!-- adoption modal ends-->
       </main>
      <!-- main section end -->
      

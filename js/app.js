@@ -78,23 +78,26 @@ const displayAllPost = (posts) => {
                         Gender: ${post?.gender ? post.gender : "not available"}
                     </p>
                     <p>
-                        Price : ${post?.price ? post. price+"$" : "not available"}
+                        Price : ${
+                          post?.price ? post.price + "$" : "not available"
+                        }
                     </p>
                 </div>
                 <div class="flex items-center gap-3">
                     <button onclick="addToCart('${
                       post?.image
-                    }')" class="btn bg-white border text-button"><i class="fa-regular fa-thumbs-up"></i></button>
-                    <button onclick="adoptionHandler()" class="btn bg-white border text-button">Adopt</button>
-                    <button id="showModalData" onclick="modalHandler('${
+                    }')" class="btn bg-white border border-button text-button hover:bg-button hover:text-white"><i class="fa-regular fa-thumbs-up"></i></button>
+                    <button id="btn-${post.petId}" onclick="adoptionHandler('${
+      post.petId
+    }')" class="btn bg-white border border-button text-button hover:bg-button hover:text-white">Adopt</button>
+                    <button onclick="modalHandler('${
                       post?.petId
-                    }')" class="btn bg-white border text-button">Details</button>
+                    }')" class="btn bg-white border-button border text-button hover:bg-button hover:text-white">Details</button>
                 </div>
             </div>                
    `;
     cardContainer.append(card);
   });
-  
 
   posts.sort((a, b) => b.price - a.price);
   document.getElementById("sort-by-price").addEventListener("click", () => {
@@ -121,6 +124,27 @@ const categoryHandler = async (categoryName) => {
   }, 2000);
 };
 
+const adoptionHandler = (id) => {
+  const countdownText = document.getElementById("countdownText");
+  let countdown = 2;
+  const adoptButton = document.getElementById(`btn-${id}`);
+  document.getElementById("adoptModal").showModal();
+  const interval = setInterval(() => {
+    if (countdown > 0) {
+      countdownText.textContent = `${countdown}`;
+      countdown--;
+    } else {
+      clearInterval(interval);
+      setTimeout(() => {
+        document.getElementById("hideModal").click();
+        adoptButton.innerText = "Adopted";
+        adoptButton.disabled = true;
+      }, 0);
+    }
+  }, 1000);
+  countdownText.innerText = 3;
+};
+
 const removeActive = () => {
   const activeBtns = document.getElementsByClassName("category-btn");
   for (const btn of activeBtns) {
@@ -144,7 +168,7 @@ const modalHandler = async (petId) => {
     `https://openapi.programming-hero.com/api/peddy/pet/${petId}`
   );
   const data = await response.json();
-  document.getElementById('modal-btn').click()
+  document.getElementById("modal-btn").click();
   displayDetails(data.petData);
 };
 
@@ -161,13 +185,9 @@ const displayDetails = (petsdetails) => {
     pet_name,
   } = petsdetails;
   const card = document.getElementById("modal-details-container");
-    card.classList = "p-5 border rounded-lg space-y-3";
-    card.innerHTML = `
-            <div><img src=${
-              image
-            } class="h-full object-cover rounded-lg w-full" alt='picture of ${
-      category
-    }'></div>
+  card.classList = "p-5 border rounded-lg space-y-3";
+  card.innerHTML = `
+            <div><img src=${image} class="h-full object-cover rounded-lg w-full" alt='picture of ${category}'></div>
             <div class="space-y-3">
                 <h1 class="text-xl font-bold text-black">${
                   pet_name ? pet_name : "not available"
@@ -178,19 +198,21 @@ const displayDetails = (petsdetails) => {
                     </p>
                     <p>
                         Birth: ${
-                          date_of_birth
-                            ? date_of_birth
-                            : "not available"
+                          date_of_birth ? date_of_birth : "not available"
                         }
                     </p>
                     <p>
                         Gender: ${gender ? gender : "not available"}
                     </p>
                     <p>
-                        Price : ${price ? price+"$": "not available"}
+                        Price : ${price ? price + "$" : "not available"}
                     </p>
                     <p>
-                        Vaccinated status: ${vaccinated_status ? vaccinated_status : "not available"}
+                        Vaccinated status: ${
+                          vaccinated_status
+                            ? vaccinated_status
+                            : "not available"
+                        }
                     </p>
                 </div>
                 <hr>
@@ -202,7 +224,6 @@ const displayDetails = (petsdetails) => {
                 </div>
             </div>                
    `;
-  
 };
 
 loadAllPost();
