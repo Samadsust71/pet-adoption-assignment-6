@@ -1,5 +1,3 @@
-
-
 const loadAllCategory = async () => {
   const reponse = await fetch(
     "https://openapi.programming-hero.com/api/peddy/categories"
@@ -13,12 +11,12 @@ const loadAllPost = async () => {
     "https://openapi.programming-hero.com/api/peddy/pets"
   );
   const data = await res.json();
-  
-  document.getElementById('loading-container').style.display='block'
-  document.getElementById('card-container').classList.add('hidden')
-   setTimeout(()=>{
+
+  document.getElementById("loading-container").style.display = "block";
+  document.getElementById("card-container").classList.add("hidden");
+  setTimeout(() => {
     displayAllPost(data.pets);
-   },2000)
+  }, 2000);
 };
 
 const displayAllCategory = (categories) => {
@@ -28,7 +26,7 @@ const displayAllCategory = (categories) => {
   categories.forEach((category) => {
     const categoryBtn = document.createElement("div");
     categoryBtn.innerHTML = `
-        <button onclick="categoryHandler('${category?.category}')" class="bg-white border w-40 flex items-center justify-center gap-4 p-3 rounded-2xl hover:bg-activeBtn">
+        <button id="btn-${category?.category}" onclick="categoryHandler('${category?.category}')" class="category-btn bg-white border w-40 flex items-center justify-center gap-4 p-3 rounded-2xl hover:bg-activeBtn">
                   <div><img src=${category?.category_icon} alt="" class=" h-10 w-10 object-cover"></div>
                   <p class="font-bold text-primary text-xl">${category?.category}</p>
                 </button>
@@ -38,8 +36,8 @@ const displayAllCategory = (categories) => {
 };
 
 const displayAllPost = (posts) => {
-    document.getElementById('loading-container').style.display='none'
-    document.getElementById('card-container').classList.remove('hidden')
+  document.getElementById("loading-container").style.display = "none";
+  document.getElementById("card-container").classList.remove("hidden");
   const cardContainer = document.getElementById("card-container");
   cardContainer.innerHTML = "";
   if (posts.length === 0) {
@@ -95,26 +93,39 @@ const displayAllPost = (posts) => {
             </div>                
    `;
     cardContainer.append(card);
-   
-  })
+  });
 
   posts.sort((a, b) => b.price - a.price);
-  document.getElementById('sort-by-price').addEventListener('click', () => {
+  document.getElementById("sort-by-price").addEventListener("click", () => {
     displayAllPost(posts);
   });
 };
-
 
 const categoryHandler = async (categoryName) => {
   const response = await fetch(
     `https://openapi.programming-hero.com/api/peddy/category/${categoryName}`
   );
   const data = await response.json();
-  document.getElementById('loading-container').style.display='block'
-  document.getElementById('card-container').classList.add('hidden')
-   setTimeout(()=>{
+  document.getElementById("loading-container").style.display = "block";
+  document.getElementById("card-container").classList.add("hidden");
+
+  removeActive();
+  document.getElementById(`btn-${categoryName}`).classList.add("bg-activeBtn");
+  document
+    .getElementById(`btn-${categoryName}`)
+    .classList.add("rounded-[32px]");
+
+  setTimeout(() => {
     displayAllPost(data.data);
-   },2000)
+  }, 2000);
+};
+
+const removeActive = () => {
+  const activeBtn = document.getElementsByClassName("category-btn");
+  for (const btn of activeBtn) {
+    btn.classList.remove("bg-activeBtn");
+    btn.classList.remove("rounded-[32px]");
+  }
 };
 
 const addToCart = (imageLink) => {
