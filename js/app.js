@@ -79,7 +79,7 @@ const displayAllPost = (posts) => {
                 <div class="flex items-center gap-3">
                     <button onclick="addToCart('${
                       post?.image
-                    }')" class="btn bg-white border text-button">like</button>
+                    }')" class="btn bg-white border text-button"><i class="fa-regular fa-thumbs-up"></i></button>
                     <button onclick="adoptionHandler()" class="btn bg-white border text-button">Adopt</button>
                     <button onclick="modalHandler('${
                       post?.petId
@@ -88,8 +88,15 @@ const displayAllPost = (posts) => {
             </div>                
    `;
     cardContainer.append(card);
+   
+  })
+
+  posts.sort((a, b) => b.price - a.price);
+  document.getElementById('sort-by-price').addEventListener('click', () => {
+    displayAllPost(posts);
   });
 };
+
 
 const categoryHandler = async (categoryName) => {
   const response = await fetch(
@@ -120,6 +127,7 @@ const modalHandler = async (petId) => {
   const data = await response.json();
   displayDetails(data.petData);
 };
+
 const displayDetails = (petsdetails) => {
   const {
     breed,
