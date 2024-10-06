@@ -5,6 +5,7 @@ const loadAllCategory = async () => {
   const data = await reponse.json();
   displayAllCategory(data.categories);
 };
+
 const loadAllPost = async () => {
   const res = await fetch(
     "https://openapi.programming-hero.com/api/peddy/pets"
@@ -30,6 +31,8 @@ const displayAllCategory = (categories) => {
 };
 
 const displayAllPost = (posts) => {
+    document.getElementById('loading-container').style.display='none'
+    document.getElementById('card-container').classList.remove('hidden')
   const cardContainer = document.getElementById("card-container");
   cardContainer.innerHTML = "";
   if (posts.length === 0) {
@@ -87,32 +90,49 @@ const displayAllPost = (posts) => {
     cardContainer.append(card);
   });
 };
+
 const categoryHandler = async (categoryName) => {
   const response = await fetch(
     `https://openapi.programming-hero.com/api/peddy/category/${categoryName}`
   );
   const data = await response.json();
-  displayAllPost(data.data);
+  document.getElementById('loading-container').style.display='block'
+  document.getElementById('card-container').classList.add('hidden')
+   setTimeout(()=>{
+    displayAllPost(data.data);
+   },3000)
 };
+
 const addToCart = (imageLink) => {
   const petImgContainer = document.getElementById("pet-image-conatiner");
-  petImgContainer.classList.add('border')
+  petImgContainer.classList.add("border");
   const petImage = document.createElement("div");
   petImage.innerHTML = `
         <img src="${imageLink}" class="h-32 object-cover rounded-lg w-full" alt="">
      `;
   petImgContainer.append(petImage);
 };
-const modalHandler = async(petId)=>{
-    const response = await fetch(`https://openapi.programming-hero.com/api/peddy/pet/${petId}`)
-    const data = await response.json()
-    displayDetails(data.petData)
-    
-}
-const displayDetails = (petsdetails)=>{
-    const {breed,category,date_of_birth,price,image,gender,pet_details,vaccinated_status,pet_name}=petsdetails
-    
-}
+
+const modalHandler = async (petId) => {
+  const response = await fetch(
+    `https://openapi.programming-hero.com/api/peddy/pet/${petId}`
+  );
+  const data = await response.json();
+  displayDetails(data.petData);
+};
+const displayDetails = (petsdetails) => {
+  const {
+    breed,
+    category,
+    date_of_birth,
+    price,
+    image,
+    gender,
+    pet_details,
+    vaccinated_status,
+    pet_name,
+  } = petsdetails;
+};
 
 loadAllPost();
 loadAllCategory();
