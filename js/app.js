@@ -45,8 +45,7 @@ const displayAllPost = (posts) => {
         <div class="text-center space-y-7 col-span-3 flex flex-col justify-center items-center bg-slate-100 py-10 rounded-lg">
             <div><img src="assests/error.webp" alt=""></div>
             <h1 class="text-2xl text-black font-extrabold">No Information Available</h1>
-            <p class="w-[70%]">It is a long established fact that a reader will be distracted by the readable content of a page when looking at 
-              its layout. The point of using Lorem Ipsum is that it has a.</p>
+            <p class="w-[70%]">Currently, we don't have any birds available for adoption. Please check back soon for updates on our feathered friends!</p>
        </div>
         `;
   }
@@ -86,13 +85,13 @@ const displayAllPost = (posts) => {
                 <div class="flex items-center gap-3">
                     <button onclick="addToCart('${
                       post?.image
-                    }')" class="btn bg-white border border-button text-button hover:bg-button hover:text-white"><i class="fa-regular fa-thumbs-up"></i></button>
+                    }')" class="btn bg-white border border-button text-button"><i class="fa-regular fa-thumbs-up"></i></button>
                     <button id="btn-${post.petId}" onclick="adoptionHandler('${
       post.petId
-    }')" class="btn bg-white border border-button text-button hover:bg-button hover:text-white">Adopt</button>
+    }')" class="btn bg-white border border-button text-button">Adopt</button>
                     <button onclick="modalHandler('${
                       post?.petId
-                    }')" class="btn bg-white border-button border text-button hover:bg-button hover:text-white">Details</button>
+                    }')" class="btn bg-white border-button border text-button">Details</button>
                 </div>
             </div>                
    `;
