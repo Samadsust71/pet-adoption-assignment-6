@@ -26,7 +26,7 @@ const displayAllCategory = (categories) => {
   categories.forEach((category) => {
     const categoryBtn = document.createElement("div");
     categoryBtn.innerHTML = `
-        <button id="btn-${category?.category}" onclick="categoryHandler('${category?.category}')" class="category-btn bg-white border w-40 flex items-center justify-center gap-4 p-3 rounded-2xl hover:bg-activeBtn">
+        <button id="btn-${category?.category}" onclick="categoryHandler('${category?.category}')" class="category-btn border w-40 flex items-center justify-center gap-4 p-3 rounded-2xl hover:bg-activeBtn">
                   <div><img src=${category?.category_icon} alt="" class=" h-10 w-10 object-cover"></div>
                   <p class="font-bold text-primary text-xl">${category?.category}</p>
                 </button>
@@ -78,7 +78,7 @@ const displayAllPost = (posts) => {
                         Gender: ${post?.gender ? post.gender : "not available"}
                     </p>
                     <p>
-                        Price : ${post?.price ? post.price : "not available"}$
+                        Price : ${post?.price ? post. price+"$" : "not available"}
                     </p>
                 </div>
                 <div class="flex items-center gap-3">
@@ -86,7 +86,7 @@ const displayAllPost = (posts) => {
                       post?.image
                     }')" class="btn bg-white border text-button"><i class="fa-regular fa-thumbs-up"></i></button>
                     <button onclick="adoptionHandler()" class="btn bg-white border text-button">Adopt</button>
-                    <button onclick="modalHandler('${
+                    <button id="showModalData" onclick="modalHandler('${
                       post?.petId
                     }')" class="btn bg-white border text-button">Details</button>
                 </div>
@@ -94,6 +94,7 @@ const displayAllPost = (posts) => {
    `;
     cardContainer.append(card);
   });
+  
 
   posts.sort((a, b) => b.price - a.price);
   document.getElementById("sort-by-price").addEventListener("click", () => {
@@ -121,8 +122,8 @@ const categoryHandler = async (categoryName) => {
 };
 
 const removeActive = () => {
-  const activeBtn = document.getElementsByClassName("category-btn");
-  for (const btn of activeBtn) {
+  const activeBtns = document.getElementsByClassName("category-btn");
+  for (const btn of activeBtns) {
     btn.classList.remove("bg-activeBtn");
     btn.classList.remove("rounded-[32px]");
   }
@@ -143,6 +144,7 @@ const modalHandler = async (petId) => {
     `https://openapi.programming-hero.com/api/peddy/pet/${petId}`
   );
   const data = await response.json();
+  document.getElementById('modal-btn').click()
   displayDetails(data.petData);
 };
 
@@ -158,6 +160,49 @@ const displayDetails = (petsdetails) => {
     vaccinated_status,
     pet_name,
   } = petsdetails;
+  const card = document.getElementById("modal-details-container");
+    card.classList = "p-5 border rounded-lg space-y-3";
+    card.innerHTML = `
+            <div><img src=${
+              image
+            } class="h-full object-cover rounded-lg w-full" alt='picture of ${
+      category
+    }'></div>
+            <div class="space-y-3">
+                <h1 class="text-xl font-bold text-black">${
+                  pet_name ? pet_name : "not available"
+                }</h1>
+                <div class ="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <p>
+                        Breed: ${breed ? breed : "not available"}
+                    </p>
+                    <p>
+                        Birth: ${
+                          date_of_birth
+                            ? date_of_birth
+                            : "not available"
+                        }
+                    </p>
+                    <p>
+                        Gender: ${gender ? gender : "not available"}
+                    </p>
+                    <p>
+                        Price : ${price ? price+"$": "not available"}
+                    </p>
+                    <p>
+                        Vaccinated status: ${vaccinated_status ? vaccinated_status : "not available"}
+                    </p>
+                </div>
+                <hr>
+                <div class="">
+                     <h1 class="text-xl font-bold text-black">Details Information</h1>
+                    <p>
+                    ${pet_details}
+                    </p>
+                </div>
+            </div>                
+   `;
+  
 };
 
 loadAllPost();
