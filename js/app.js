@@ -1,3 +1,5 @@
+
+
 const loadAllCategory = async () => {
   const reponse = await fetch(
     "https://openapi.programming-hero.com/api/peddy/categories"
@@ -11,7 +13,12 @@ const loadAllPost = async () => {
     "https://openapi.programming-hero.com/api/peddy/pets"
   );
   const data = await res.json();
-  displayAllPost(data.pets);
+  
+  document.getElementById('loading-container').style.display='block'
+  document.getElementById('card-container').classList.add('hidden')
+   setTimeout(()=>{
+    displayAllPost(data.pets);
+   },2000)
 };
 
 const displayAllCategory = (categories) => {
@@ -47,7 +54,7 @@ const displayAllPost = (posts) => {
   }
   posts.forEach((post) => {
     const card = document.createElement("div");
-    card.classList = "p-5 border rounded-lg space-y-3";
+    card.classList = "p-5 border rounded-lg space-y-3 h-[420px]";
     card.innerHTML = `
             <div><img src=${
               post?.image
@@ -107,7 +114,7 @@ const categoryHandler = async (categoryName) => {
   document.getElementById('card-container').classList.add('hidden')
    setTimeout(()=>{
     displayAllPost(data.data);
-   },3000)
+   },2000)
 };
 
 const addToCart = (imageLink) => {
