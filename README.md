@@ -22,5 +22,6 @@ Peddy is a web-based pet adoption platform designed to connect potential pet own
 5. Promises and Async/Await
 6. `for...of` loop
 7. `forEach` method
+8. default parameters...etc
 
 **Live Link :**   https://peddy-the-pet-adoption-site.netlify.app/

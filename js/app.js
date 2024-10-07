@@ -1,24 +1,59 @@
+
+
+const delayWhileFetch = (url, delay = 2000) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(fetch(url));
+    }, delay);
+  });
+};
+
 const loadAllCategory = async () => {
-  const reponse = await fetch(
-    "https://openapi.programming-hero.com/api/peddy/categories"
-  );
-  const data = await reponse.json();
-  displayAllCategory(data.categories);
+  try {
+    const response = await delayWhileFetch(
+      "https://openapi.programming-hero.com/api/peddy/categories"
+    );
+    const data = await response.json();
+    displayAllCategory(data.categories);
+  } catch (error) {
+    console.error("Error fetching categories:", error);
+  }
 };
 
 const loadAllPost = async () => {
-  const res = await fetch(
-    "https://openapi.programming-hero.com/api/peddy/pets"
-  );
-  const data = await res.json();
-
   document.getElementById("loading-container").style.display = "block";
   document.getElementById("card-container").classList.add("hidden");
-  setTimeout(() => {
-    displayAllPost(data.pets);
-  }, 2000);
-};
 
+  try {
+    const response = await delayWhileFetch(
+      "https://openapi.programming-hero.com/api/peddy/pets"
+    );
+    const data = await response.json();
+    displayAllPost(data.pets);
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+  }
+};
+const categoryHandler = async (categoryName) => {
+  
+  document.getElementById("loading-container").style.display = "block";
+  document.getElementById("card-container").classList.add("hidden");
+  removeActive();
+  document.getElementById(`btn-${categoryName}`).classList.add("bg-activeBtn");
+  document
+    .getElementById(`btn-${categoryName}`)
+    .classList.add("rounded-[32px]");
+ 
+  try {
+    const response = await delayWhileFetch(
+      `https://openapi.programming-hero.com/api/peddy/category/${categoryName}`
+    );
+    const data = await response.json();
+    displayAllPost(data.data);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+};
 const displayAllCategory = (categories) => {
   const categoryBtnContainer = document.getElementById(
     "catagory-btn-container"
@@ -102,25 +137,6 @@ const displayAllPost = (posts) => {
   document.getElementById("sort-by-price").addEventListener("click", () => {
     displayAllPost(posts);
   });
-};
-
-const categoryHandler = async (categoryName) => {
-  const response = await fetch(
-    `https://openapi.programming-hero.com/api/peddy/category/${categoryName}`
-  );
-  const data = await response.json();
-  document.getElementById("loading-container").style.display = "block";
-  document.getElementById("card-container").classList.add("hidden");
-
-  removeActive();
-  document.getElementById(`btn-${categoryName}`).classList.add("bg-activeBtn");
-  document
-    .getElementById(`btn-${categoryName}`)
-    .classList.add("rounded-[32px]");
-
-  setTimeout(() => {
-    displayAllPost(data.data);
-  }, 2000);
 };
 
 const adoptionHandler = (id) => {
@@ -215,7 +231,7 @@ const displayDetails = (petsdetails) => {
                     </p>
                 </div>
                 <hr>
-                <div class="">
+                <div class="space-y-3">
                      <h1 class="text-xl font-bold text-black">Details Information</h1>
                     <p>
                     ${pet_details}
