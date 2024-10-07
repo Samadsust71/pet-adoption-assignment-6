@@ -83,6 +83,7 @@ const displayAllPost = (posts) => {
             <p class="w-[70%]">Currently, we don't have any birds available for adoption. Please check back soon for updates on our feathered friends!</p>
        </div>
         `;
+        
   }
   posts.forEach((post) => {
     const card = document.createElement("div");
@@ -150,11 +151,9 @@ const adoptionHandler = (id) => {
       countdown--;
     } else {
       clearInterval(interval);
-      setTimeout(() => {
         document.getElementById("hideModal").click();
         adoptButton.innerText = "Adopted";
         adoptButton.disabled = true;
-      }, 0);
     }
   }, 1000);
   countdownText.innerText = 3;
