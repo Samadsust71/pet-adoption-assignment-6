@@ -60,25 +60,25 @@ const displayAllPost = (posts) => {
     }'></div>
             <div class="space-y-3">
                 <h1 class="text-xl font-bold text-black ">${
-                  post?.pet_name ? post.pet_name : "not available"
+                  post?.pet_name ? post.pet_name : "Not available"
                 }</h1>
-                <div>
+                <div class="text-secondary text-sm">
                     <p>
-                        Breed: ${post?.breed ? post.breed : "not available"}
+                       <i class="fa-solid fa-dna"></i> Breed: ${post?.breed ? post.breed : "Not available"}
                     </p>
                     <p>
-                        Birth: ${
+                       <i class="fa-solid fa-cake-candles"></i> Birth: ${
                           post?.date_of_birth
                             ? post.date_of_birth
-                            : "not available"
+                            : "Not available"
                         }
                     </p>
                     <p>
-                        Gender: ${post?.gender ? post.gender : "not available"}
+                       <i class="fa-solid fa-venus"></i> Gender: ${post?.gender ? post.gender : "Not available"}
                     </p>
                     <p>
-                        Price : ${
-                          post?.price ? post.price + "$" : "not available"
+                      <i class="fa-solid fa-dollar-sign"></i> Price : ${
+                          post?.price ? post.price + "$" : "Not available"
                         }
                     </p>
                 </div>
@@ -189,28 +189,28 @@ const displayDetails = (petsdetails) => {
             <div><img src=${image} class="h-full object-cover rounded-lg w-full" alt='picture of ${category}'></div>
             <div class="space-y-3">
                 <h1 class="text-xl font-bold text-black">${
-                  pet_name ? pet_name : "not available"
+                  pet_name ? pet_name : "Not available"
                 }</h1>
-                <div class ="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class ="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-secondary">
                     <p>
-                        Breed: ${breed ? breed : "not available"}
+                       <i class="fa-solid fa-dna"></i> Breed: ${breed ? breed : "Not available"}
                     </p>
                     <p>
-                        Birth: ${
-                          date_of_birth ? date_of_birth : "not available"
+                       <i class="fa-solid fa-cake-candles"></i> Birth: ${
+                          date_of_birth ? date_of_birth : "Not available"
                         }
                     </p>
                     <p>
-                        Gender: ${gender ? gender : "not available"}
+                       <i class="fa-solid fa-venus"></i> Gender: ${gender ? gender : "Not available"}
                     </p>
                     <p>
-                        Price : ${price ? price + "$" : "not available"}
+                       <i class="fa-solid fa-dollar-sign"></i> Price : ${price ? price + "$" : "Not available"}
                     </p>
                     <p>
-                        Vaccinated status: ${
+                       <i class="fa-solid fa-syringe"></i> Vaccinated status: ${
                           vaccinated_status
                             ? vaccinated_status
-                            : "not available"
+                            : "Not available"
                         }
                     </p>
                 </div>
