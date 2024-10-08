@@ -10,7 +10,7 @@ const delayWhileFetch = (url, delay = 2000) => {
 
 const loadAllCategory = async () => {
   try {
-    const response = await delayWhileFetch(
+    const response = await fetch(
       "https://openapi.programming-hero.com/api/peddy/categories"
     );
     const data = await response.json();
@@ -80,25 +80,25 @@ const displayAllPost = (posts) => {
         <div class="text-center space-y-7 col-span-3 flex flex-col justify-center items-center bg-slate-100 py-10 rounded-lg">
             <div><img src="assests/error.webp" alt=""></div>
             <h1 class="text-2xl text-black font-extrabold">No Information Available</h1>
-            <p class="w-[70%]">Currently, we don't have any birds available for adoption. Please check back soon for updates on our feathered friends!</p>
+            <p class="w-[70%]">Currently, we don't have any birds available for adoption. Please check back soon for updates on our website friends!</p>
        </div>
         `;
         
   }
   posts.forEach((post) => {
     const card = document.createElement("div");
-    card.classList = "p-5 border rounded-lg space-y-3 h-[420px]";
+    card.classList = "p-4 border rounded-lg space-y-3 h-[420px]";
     card.innerHTML = `
             <div><img src=${
               post?.image
-            } class="h-40 object-cover rounded-lg w-full" alt='picture of ${
+            } class="h-[180px] object-cover rounded-lg w-full" alt='picture of ${
       post?.category
     }'></div>
             <div class="space-y-3">
                 <h1 class="text-xl font-bold text-black ">${
                   post?.pet_name ? post.pet_name : "Not available"
                 }</h1>
-                <div class="text-secondary text-sm">
+                <div class="text-secondary text-sm space-y-1">
                     <p>
                        <i class="fa-solid fa-dna"></i> Breed: ${post?.breed ? post.breed : "Not available"}
                     </p>
